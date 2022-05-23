@@ -20,77 +20,122 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc,LoginState>(
-      builder: (context, state) {
-        return Scaffold(
-          body: Column(
-            children:[
-              Text('Welcome Back,'),
-              Text('Sign in to continue'),
-              Form(
-                key: _formKey,
-               child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Email Address'
-                    ),
-                    onChanged: (val){
-                      email=val;
-                    },
-                    validator: (val){
-                      if(val==null || val!.isEmpty)
-                        return "Please Enter email";
-                    },
+    return BlocConsumer<LoginBloc,LoginState>(
+      listener: (context, state) {
+        if(state is LoginSuccessfulState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+             const SnackBar(content: Text("Login successful !")));
+        }
+      },
+        builder: (context, state) {
+          return Scaffold(
+            body: Container(
+              margin: const EdgeInsets.only(left: 20,top: 60,right: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  Text("Selected Language : ${state.language??"not selected"}"),
+                  const SizedBox(
+                    height: 10,
                   ),
-                  TextFormField(
-                    obscureText: true,
-                    obscuringCharacter: '*',
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                    ),
-                    onChanged: (val){
-                      password=val;
-                    },
-                    validator: (val){
-                      if(val==null || val!.isEmpty)
-                        return "Please Enter password";
-                    },
-                  )
-                ],
-              ),
-              ),
-              Text('Forgot password?'),
-              ElevatedButton(onPressed: (){
-               if(_formKey.currentState!.validate())
-                 {
-                   BlocProvider.of<LoginBloc>(context).add(
-                       UserLoginEvent(email, password));
-                 }
-              },
-                  child:Text("Sign in") ),
-            RichText(
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextSpan(text: 'For New User , '),
-                  TextSpan(
-                      text: 'Sign Up',
-                      style: TextStyle(
-                        color: Colors.blue
+                  Text('Welcome Back,',style: Theme.of(context).textTheme.headline1,),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text('Sign in to continue',style: Theme.of(context).textTheme.subtitle1,),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Form(
+                    key: _formKey,
+                   child: Column(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          hintText: 'Email Address',
+                          alignLabelWithHint: true,
+                        ),
+                        onChanged: (val){
+                          email=val;
+                        },
+                        validator: (val){
+                          if(val==null || val.isEmpty) {
+                            return "Please Enter email";
+                          }
+                          return null;
+                        },
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          print('Navigate to Sign Up page');
-                        }),
-                ],
+                      TextFormField(
+                        obscureText: isObscureText,
+                        obscuringCharacter: '*',
+                        decoration: const InputDecoration(
+                          hintText: 'Password',
+                        ),
+                        onChanged: (val){
+                          password=val;
+                        },
+                        validator: (val){
+                          if(val==null || val.isEmpty) {
+                            return "Please Enter password";
+                          }
+                          return null;
+                        },
+                      )
+                    ],
+                  ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                      child: Text('Forgot password?',
+                        style: Theme.of(context).textTheme.bodyText1,)),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: ElevatedButton(onPressed: (){
+                     if(_formKey.currentState!.validate())
+                       {
+                         BlocProvider.of<LoginBloc>(context).add(
+                             UserLoginEvent(email, password,state.language??'Not Selected'));
+                       }
+                    },
+                        child:const Text("Sign in") ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                Center(
+                  child: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(text: 'For New User , ',
+                          style: Theme.of(context).textTheme.bodyText1
+                        ),
+                        TextSpan(
+                            text: 'Sign Up',
+                            style: const TextStyle(
+                              color: Colors.blue
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                print('Navigate to Sign Up page');
+                              }),
+                      ],
+                    ),
+                  ),
+                )
+
+                ]
+
               ),
-            )
-
-            ]
-
-          ),
-        );
-      }
+            ),
+          );
+        },
     );
   }
 }

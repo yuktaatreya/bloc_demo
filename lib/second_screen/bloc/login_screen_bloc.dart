@@ -8,7 +8,7 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
       emit(LanguageSelectedState(event.language));
     });
     on<UserLoginEvent>((event,emit){
-      emit(LoginSuccessfulState(event.email));
+      emit(LoginSuccessfulState(event.email,event.language));
     });
   }
 

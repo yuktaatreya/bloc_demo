@@ -24,7 +24,10 @@ class LoginScreenLoadingState extends LoginState {
 
 class LoginSuccessfulState extends LoginState {
   final String _email;
-  LoginSuccessfulState(this._email);
+  final String _language;
+  LoginSuccessfulState(this._email,this._language);
   @override
   String get email=> _email;
+  @override
+  String get language=> _language;
 }

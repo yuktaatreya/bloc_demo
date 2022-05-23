@@ -7,5 +7,6 @@ class SelectLanguageEvent extends LoginEvent{
 class UserLoginEvent extends LoginEvent{
   final String email;
   final String password;
-  UserLoginEvent(this.email,this.password);
+  final String language;
+  UserLoginEvent(this.email,this.password,this.language);
 }
