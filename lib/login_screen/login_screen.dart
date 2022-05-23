@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled/second_screen/bloc/login_screen_bloc.dart';
-import 'package:untitled/second_screen/bloc/login_screen_events.dart';
-import 'package:untitled/second_screen/bloc/login_screen_states.dart';
+import 'package:untitled/login_screen/bloc/login_screen_bloc.dart';
+import 'package:untitled/login_screen/bloc/login_screen_events.dart';
+import 'package:untitled/login_screen/bloc/login_screen_states.dart';
 class LoginScreen extends StatefulWidget {
 
   const LoginScreen({Key? key}) : super(key: key);

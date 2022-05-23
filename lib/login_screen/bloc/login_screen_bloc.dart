@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:untitled/second_screen/bloc/login_screen_events.dart';
-import 'package:untitled/second_screen/bloc/login_screen_states.dart';
+import 'package:untitled/login_screen/bloc/login_screen_events.dart';
+import 'package:untitled/login_screen/bloc/login_screen_states.dart';
 
 class LoginBloc extends Bloc<LoginEvent,LoginState>{
   LoginBloc(LoginState initialState) : super(InitialState()){
