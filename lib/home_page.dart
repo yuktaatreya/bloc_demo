@@ -6,15 +6,10 @@ import 'login_screen/bloc/login_screen_events.dart';
 import 'login_screen/bloc/login_screen_states.dart';
 import 'login_screen/login_screen.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
 
-  @override
-  State<HomePage> createState() => _MyHomePageState();
-}
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
-class _MyHomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +17,7 @@ class _MyHomePageState extends State<HomePage> {
         builder: (context,state) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(widget.title),
+              title: const Text("Flutter Bloc Demo"),
             ),
             body: Center(
               child: Column(

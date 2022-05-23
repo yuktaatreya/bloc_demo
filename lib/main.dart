@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled/login_screen/bloc/login_screen_bloc.dart';
-import 'package:untitled/login_screen/bloc/login_screen_events.dart';
 import 'package:untitled/login_screen/bloc/login_screen_states.dart';
 import 'package:untitled/home_page.dart';
-import 'package:untitled/login_screen/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
             bodyText1: TextStyle(fontSize: 14)
           )
         ),
-        home: const HomePage(title: 'Flutter Demo Home Page'),
+        home: HomePage(),
       ),
     );
   }
